@@ -1,8 +1,9 @@
 <!DOCTYPE html>
+
 <html lang="fr">
 <head>
-  <meta charset="UTF-8" />
-  <style>
+<meta charset="utf-8"/>
+<style>
     body {
       font-family: 'Antonio', sans-serif;
       background: transparent;
@@ -41,7 +42,6 @@
       font-size: 0.75em;
       text-align: right;
     }
-    #duration.top-right {
       position: absolute;
       top: 0.6cm;
       right: 3.2em;
@@ -50,21 +50,19 @@
       color: #00447e;
     }
   </style>
-  <link href="https://fonts.googleapis.com/css2?family=Antonio:wght@700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Antonio:wght@700&amp;display=swap" rel="stylesheet"/>
 </head>
 <body>
-  <label for="start">Départ :</label>
-  <select id="start"></select>
-  <label for="end">Arrivée :</label>
-  <select id="end"></select>
-  <button onclick="launchSimulation()">Lancer</button>
-  <div id="duration" class="top-right"></div>
-  <div id="thermometer">
-    <div id="fill"></div>
-  </div>
-  <div class="stations" id="stations"></div>
-
-  <script>
+<label for="start">Départ :</label>
+<select id="start"></select>
+<label for="end">Arrivée :</label>
+<select id="end"></select>
+<button onclick="launchSimulation()">Lancer</button>
+<div style="display: flex; justify-content: center; align-items: center; height: 3em;"><div id="duration" style="font-size: 3em; font-weight: bold; color: #00447e;"></div></div><div id="thermometer">
+<div id="fill"></div>
+</div>
+<div class="stations" id="stations"></div>
+<script>
     window.onload = function() {
       const stations = [
         "Pessac-Antilles", "École d'architecture", "Arts-et-Métiers", "Gare de Talence-Médoquine",
