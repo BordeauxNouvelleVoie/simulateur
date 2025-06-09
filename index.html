@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -85,7 +84,6 @@
       const fillDiv = document.getElementById("fill");
       const durationEl = document.getElementById("duration");
 
-      // Remplissage des sélecteurs
       stations.forEach(station => {
         const opt1 = document.createElement("option");
         opt1.value = station;
@@ -98,7 +96,6 @@
         endSelect.add(opt2);
       });
 
-      // Affichage des stations sous le thermomètre
       stationsDiv.innerHTML = stations.map(s => `<span>${s}</span>`).join("");
 
       window.stations = stations;
@@ -135,38 +132,30 @@
 
       fillDiv.style.transition = 'none';
       fillDiv.style.width = '0%';
-      
-fillDiv.style.transition = 'none';
-fillDiv.style.width = '0%';
-fillDiv.style.left = '';
-fillDiv.style.right = '';
-if (forward) {
-  fillDiv.style.left = `${100 * (startIndex / (stations.length - 1))}%`;
-} else {
-  fillDiv.style.right = `${100 * ((stations.length - 1 - startIndex) / (stations.length - 1))}%`;
-}
-void fillDiv.offsetWidth;
-fillDiv.style.transition = `width ${animationDuration}s linear`;
-fillDiv.style.width = `${Math.abs(endIndex - startIndex) / (stations.length - 1) * 100}%`;
+      fillDiv.style.left = '';
+      fillDiv.style.right = '';
+      if (forward) {
+        fillDiv.style.left = `${100 * (startIndex / (stations.length - 1))}%`;
+      } else {
+        fillDiv.style.right = `${100 * ((stations.length - 1 - startIndex) / (stations.length - 1))}%`;
+      }
+      void fillDiv.offsetWidth;
+      fillDiv.style.transition = `width ${animationDuration}s linear`;
+      fillDiv.style.width = `${Math.abs(endIndex - startIndex) / (stations.length - 1) * 100}%`;
 
-
-      
-
-let elapsed = 0;
-durationEl.textContent = `Durée du trajet : 0:00`;
-clearInterval(window.timerInterval);
-const intervalStep = fullDuration / (animationDuration * 10); // 10 updates per second
-window.timerInterval = setInterval(() => {
-  elapsed += intervalStep;
-  if (elapsed >= fullDuration) {
-    clearInterval(window.timerInterval);
-    durationEl.textContent = `Durée du trajet : ${Math.floor(fullDuration / 60)}:${(Math.round(fullDuration % 60)).toString().padStart(2, '0')}`;
-    return;
-  }
-  durationEl.textContent = `Durée du trajet : ${Math.floor(elapsed / 60)}:${(Math.floor(elapsed % 60)).toString().padStart(2, '0')}`;
-}, 100);
-
-
+      let elapsed = 0;
+      durationEl.textContent = `Durée du trajet : 0:00`;
+      clearInterval(window.timerInterval);
+      const intervalStep = fullDuration / (animationDuration * 10);
+      window.timerInterval = setInterval(() => {
+        elapsed += intervalStep;
+        if (elapsed >= fullDuration) {
+          clearInterval(window.timerInterval);
+          durationEl.textContent = `Durée du trajet : ${Math.floor(fullDuration / 60)}:${(Math.round(fullDuration % 60)).toString().padStart(2, '0')}`;
+          return;
+        }
+        durationEl.textContent = `Durée du trajet : ${Math.floor(elapsed / 60)}:${(Math.floor(elapsed % 60)).toString().padStart(2, '0')}`;
+      }, 100);
     }
   </script>
 </body>
