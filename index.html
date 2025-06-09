@@ -2,15 +2,11 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8" />
-  <title>Simulateur de Trajet - Ligne Métro</title>
   <style>
     body {
       font-family: 'Antonio', sans-serif;
       background: transparent;
       margin: 2em;
-    }
-    h1 {
-      color: #00447e;
     }
     select, button {
       font-size: 1em;
@@ -44,25 +40,29 @@
       transform: rotate(180deg);
       font-size: 0.75em;
       text-align: right;
-}
-    #duration {
+    }
+    #duration.top-right {
+      position: absolute;
+      top: 0.6cm;
+      right: 6em;
+      font-size: 3em;
       font-weight: bold;
-      font-size: 1.2em;
+      color: #00447e;
     }
   </style>
   <link href="https://fonts.googleapis.com/css2?family=Antonio:wght@700&display=swap" rel="stylesheet">
 </head>
-<body><label for="start">Départ :</label>
+<body>
+  <label for="start">Départ :</label>
   <select id="start"></select>
   <label for="end">Arrivée :</label>
   <select id="end"></select>
   <button onclick="launchSimulation()">Lancer</button>
-
+  <div id="duration" class="top-right"></div>
   <div id="thermometer">
     <div id="fill"></div>
   </div>
   <div class="stations" id="stations"></div>
-  <p id="duration">Durée du trajet : </p>
 
   <script>
     window.onload = function() {
@@ -142,17 +142,17 @@
       fillDiv.style.width = `${Math.abs(endIndex - startIndex) / (stations.length - 1) * 100}%`;
 
       let elapsed = 0;
-      durationEl.textContent = `Durée du trajet : 0:00`;
+      durationEl.textContent = `0 min 00 s`;
       clearInterval(window.timerInterval);
       const intervalStep = fullDuration / (animationDuration * 10);
       window.timerInterval = setInterval(() => {
         elapsed += intervalStep;
         if (elapsed >= fullDuration) {
           clearInterval(window.timerInterval);
-          durationEl.textContent = `Durée du trajet : ${Math.floor(fullDuration / 60)}:${(Math.round(fullDuration % 60)).toString().padStart(2, '0')}`;
+          durationEl.textContent = `${Math.floor(fullDuration / 60)} min ${(Math.round(fullDuration % 60)).toString().padStart(2, '0')} s`;
           return;
         }
-        durationEl.textContent = `Durée du trajet : ${Math.floor(elapsed / 60)}:${(Math.floor(elapsed % 60)).toString().padStart(2, '0')}`;
+        durationEl.textContent = `${Math.floor(elapsed / 60)} min ${(Math.floor(elapsed % 60)).toString().padStart(2, '0')} s`;
       }, 100);
     }
   </script>
