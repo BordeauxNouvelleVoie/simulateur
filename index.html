@@ -65,7 +65,7 @@
     <div id="fill"></div>
   </div>
   <div class="stations" id="stations"></div>
-  <p id="duration">Durée réelle du trajet : </p>
+  <p id="duration">Durée du trajet : </p>
 
   <script>
     window.onload = function() {
@@ -76,8 +76,8 @@
         "Brazza", "Gare de Cenon", "Cenon-La Morlette"
       ];
 
-      const timesPessacToCenon = [0, 100, 214, 314, 393, 479, 587, 703, 778, 863, 949, 1043, 1154, 1224, 1335, 1432, 1544];
-      const timesCenonToPessac = [0, 86, 184, 295, 365, 476, 570, 656, 740, 815, 932, 1040, 1125, 1204, 1304, 1419, 1544];
+      const timesPessacToCenon = [0, 100, 214, 314, 393, 479, 587, 703, 778, 863, 949, 1043, 1154, 1224, 1335, 1432, 1519];
+      const timesCenonToPessac = [0, 86, 184, 295, 365, 476, 570, 656, 740, 815, 932, 1040, 1125, 1204, 1304, 1419, 1519];
 
       const startSelect = document.getElementById("start");
       const endSelect = document.getElementById("end");
@@ -131,7 +131,7 @@
       }
 
       const fullDuration = Math.abs(tEnd - tStart);
-      const animationDuration = 5 * (fullDuration / 1544);
+      const animationDuration = 5 * (fullDuration / 1519);
 
       fillDiv.style.transition = 'none';
       fillDiv.style.width = '0%';
@@ -153,17 +153,17 @@ fillDiv.style.width = `${Math.abs(endIndex - startIndex) / (stations.length - 1)
       
 
 let elapsed = 0;
-durationEl.textContent = `Durée réelle du trajet : 0:00`;
+durationEl.textContent = `Durée du trajet : 0:00`;
 clearInterval(window.timerInterval);
 const intervalStep = fullDuration / (animationDuration * 10); // 10 updates per second
 window.timerInterval = setInterval(() => {
   elapsed += intervalStep;
   if (elapsed >= fullDuration) {
     clearInterval(window.timerInterval);
-    durationEl.textContent = `Durée réelle du trajet : ${Math.floor(fullDuration / 60)}:${(Math.round(fullDuration % 60)).toString().padStart(2, '0')}`;
+    durationEl.textContent = `Durée du trajet : ${Math.floor(fullDuration / 60)}:${(Math.round(fullDuration % 60)).toString().padStart(2, '0')}`;
     return;
   }
-  durationEl.textContent = `Durée réelle du trajet : ${Math.floor(elapsed / 60)}:${(Math.floor(elapsed % 60)).toString().padStart(2, '0')}`;
+  durationEl.textContent = `Durée du trajet : ${Math.floor(elapsed / 60)}:${(Math.floor(elapsed % 60)).toString().padStart(2, '0')}`;
 }, 100);
 
 
