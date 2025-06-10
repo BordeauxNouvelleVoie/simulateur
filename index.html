@@ -42,23 +42,19 @@
       font-size: 0.75em;
       text-align: right;
     }
-      position: absolute;
-      top: 0.6cm;
-      right: 3.2em;
-      font-size: 3em;
-      font-weight: bold;
-      color: #00447e;
-    }
   </style>
 <link href="https://fonts.googleapis.com/css2?family=Antonio:wght@700&amp;display=swap" rel="stylesheet"/>
 </head>
-<body>
-<label for="start">Départ :</label>
-<select id="start"></select>
-<label for="end">Arrivée :</label>
-<select id="end"></select>
-<button onclick="launchSimulation()">Lancer</button>
-<div style="display: flex; justify-content: center; align-items: center; height: 3em;"><div id="duration" style="font-size: 3em; font-weight: bold; color: #00447e;"></div></div><div id="thermometer">
+<body><div style="display: flex; justify-content: flex-start; align-items: center; height: 1.5em;"><label for="start">Départ :</label><select id="start"></select><label for="end">Arrivée :</label><select id="end"></select><button onclick="launchSimulation()">Lancer</button></div>
+
+
+
+
+
+<div style="display: flex; justify-content: center; align-items: center; margin-top: 1.5em;">
+<div id="duration" style="font-size: 3em; font-weight: bold; color: #00447e;">Temps de parcours</div>
+</div>
+<div id="thermometer">
 <div id="fill"></div>
 </div>
 <div class="stations" id="stations"></div>
@@ -140,11 +136,16 @@
       fillDiv.style.width = `${Math.abs(endIndex - startIndex) / (stations.length - 1) * 100}%`;
 
       let elapsed = 0;
-      durationEl.textContent = `0 min 00 s`;
+      durationEl.textContent = "";
       clearInterval(window.timerInterval);
       const intervalStep = fullDuration / (animationDuration * 10);
+      
+      let displayedSeconds = 0;
+      const interval = 100; // 100ms IRL = 1s simulée
+      const simulatedSecond = fullDuration / (animationDuration * 10); // 10 = 1s / 100ms
       window.timerInterval = setInterval(() => {
-        elapsed += intervalStep;
+        displayedSeconds++;
+        const elapsed = displayedSeconds * simulatedSecond;
         if (elapsed >= fullDuration) {
           clearInterval(window.timerInterval);
           durationEl.textContent = `${Math.floor(fullDuration / 60)} min ${(Math.round(fullDuration % 60)).toString().padStart(2, '0')} s`;
@@ -152,6 +153,7 @@
         }
         durationEl.textContent = `${Math.floor(elapsed / 60)} min ${(Math.floor(elapsed % 60)).toString().padStart(2, '0')} s`;
       }, 100);
+    
     }
   </script>
 </body>
